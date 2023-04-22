@@ -1,2 +1,2 @@
 # edabk_degital_design
-Digital Design  - Group 4
+Digital Design  - Group 3
