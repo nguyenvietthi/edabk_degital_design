@@ -3,7 +3,7 @@ module testbench();
     reg             clk=0;
     reg             rst;
     wire    [1:0]   state_now;
-    wire    [0:0]   car;
+    reg     [0:0]   car=0;
     wire    [0:0]   timeout_state1;
     wire    [0:0]   timeout_state2;
     wire    [0:0]   timeout_state3;
@@ -34,14 +34,22 @@ module testbench();
 		.timeout_state2 (timeout_state2),
 		.timeout_state3 (timeout_state3),
 		.hw_color (hw_color),
-		.ct_color (ct_color)
+		.ct_color (ct_color),
+		.state_now (state_now)
 	);
 	
 	initial begin 
         rst = 0;
         #1;
         rst = 1;
-        #1000000;
+        
+		
+		repeat(30) @(negedge clk);
+		car = 1;
+		@(negedge clk);
+		car = 0;
+		
+		#1000000;
         $finish;
     end
 	

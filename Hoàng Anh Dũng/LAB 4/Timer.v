@@ -24,6 +24,9 @@ module Timer(
 	    if(!rst) begin 
 	        hw_time <= 99;
             ct_time <= 99;
+			timeout_state1 <= 0;
+			timeout_state2 <= 0;
+			timeout_state3 <= 0;
 	    end
 	    else begin
         case(state_now)
@@ -42,12 +45,12 @@ module Timer(
 				if (hw_time > 1) begin
 					hw_time <= hw_time - 1;
 					ct_time <= ct_time - 1;
-					timeout_state1 = 0;
+					timeout_state1 <= 0;
 				end
 				else begin
 				    hw_time <= 23;
                     ct_time <= 20;
-					timeout_state1 = 1;
+					timeout_state1 <= 1;
 				end
             end
             
@@ -56,12 +59,12 @@ module Timer(
 				if (ct_time > 1) begin
 					hw_time <= hw_time - 1;
 					ct_time <= ct_time - 1;
-					timeout_state2 = 0;
+					timeout_state2 <= 0;
 				end
 				else begin
 				    hw_time <= 3;
                     ct_time <= 3;
-					timeout_state2 = 1;
+					timeout_state2 <= 1;
 				end
             end
             
@@ -70,12 +73,12 @@ module Timer(
 				if (hw_time > 1) begin
 					hw_time <= hw_time - 1;
 					ct_time <= ct_time - 1;
-					timeout_state3 = 0;
+					timeout_state3 <= 0;
 				end
 				else begin
 				    hw_time <= 99;
                     ct_time <= 99;
-					timeout_state3 = 1;
+					timeout_state3 <= 1;
 				end
             end
             

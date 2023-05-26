@@ -6,7 +6,8 @@ module State(
     input       [0:0]   timeout_state2,
     input       [0:0]   timeout_state3,
     output reg  [1:0]   hw_color,
-    output reg  [1:0]   ct_color
+    output reg  [1:0]   ct_color,
+	output reg	[1:0]   state_now
     );
     
     localparam [1:0]        //Trang thai
@@ -24,14 +25,14 @@ module State(
         GREEN   = 2'b00, 
         RED     = 2'b01,
         YELLOW  = 2'b10;      
-	reg[1:0] state_now, state_next;
+	reg[1:0] state_next;
 
-    always@(posedge clk or negedge rst) begin
-        if(!rst) begin state_now = GreenRed; end
-        else begin state_now = state_next; end
+    always@(posedge clk or negedge rst) begin			//luon phai dung <=
+        if(!rst) begin state_now <= GreenRed; end
+        else begin state_now <= state_next; end
     end
     
-    // always@(*) means "build the sensitivity list for me"
+    // always@(*) means "build the sensitivity list for me", danh sach do nhay chi la cac gia tri input thay doi
     always@(*) begin          
         state_next = state_now;
         case(state_now)
